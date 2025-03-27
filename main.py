@@ -6,12 +6,7 @@ valor_desconto = 0.20
 vermelho ="\033[31m"
 verde =  "\033[32m"
 fim_cor = "\033[m"
-def main()-> None:
-    """
-    Função Principal responsável pela execução do projeto\n
-    Args: Nenhum\n
-    Out: None
-    """
+def main():
     banner()
     placa_veiculo, velocidade_registrada, velocidade_maxima_permitida, reincidenca_motorista = cadastro_infracao()
     tipo_infracao = classificacao_infracao(velocidade_registrada,velocidade_maxima_permitida)
@@ -32,27 +27,21 @@ def main()-> None:
     print(f"O motorista recebeu uma infração {vermelho}{tipo_infracao}{fim_cor}, vai receber uma multa no valor de {vermelho}R${multa}{fim_cor}, e vai receber {vermelho}{pontos}{fim_cor} pontos , e ele {reciclagem}")
 
 
-def desconto(multa:float)->float:
+def desconto(multa):
     return multa *(1-valor_desconto)
 
 def vai_precisar_curso_reciclagem(tipo_infracao)->bool:
     return tipo_infracao == infracao_gravissima
 
 def vai_pagar_agora()->bool:
-    """
-    Caso o motorista opte por pagar ele ira receber um desconto na multa
-    """
+
     vai_pagar = input(f"Esse motorista vai pagar agora?[Default: {vermelho}Não{fim_cor}] ")
     if vai_pagar:
         return True
     return False
 
-def calculo_penalidade(tipo_infracao:str)->float:
-    """
-    Função responsável por validar qual sera a multa e a quantidade de pontos com base no tipo de infração\n
-    Args: tipo_infracao\n
-    Out: multa, pontos
-    """
+def calculo_penalidade(tipo_infracao):
+
     if tipo_infracao == infracao_leve:
         multa = 130.16
         pontos = 0
@@ -65,24 +54,15 @@ def calculo_penalidade(tipo_infracao:str)->float:
     return multa, pontos
 
     
-def cadastro_infracao()->str:
-    """"
-    Função responsável por receber as informações do motorista\n
+def cadastro_infracao():
 
-    out: placa_veiculo, velocidade_registrada, velocidade_maxima_permitida, reincidenca_motorista
-    """
     placa_veiculo = input("Placa do veiculo: ")
     velocidade_registrada = input("Digite a velocidade registrada: ")
     velocidade_maxima_permitida = input("digite a velocidade máxima permitida no local: ")
     reincidenca_motorista = input(f"Esse motorista já foi multado antes?[Default: {vermelho}Não{fim_cor}]:  ")
     return placa_veiculo, velocidade_registrada, velocidade_maxima_permitida, reincidenca_motorista
 
-def classificacao_infracao(velocidade_registrada:str,velocidade_maxima_permitida:str)-> str:
-    """"
-    Função responsável por classificar o tipo de infração\n
-    Args: velocidade_registrada, velocidade_maxima_permitida\n
-    out: tipo_infração
-    """
+def classificacao_infracao(velocidade_registrada,velocidade_maxima_permitida):
     velocidade_maxima_permitida,velocidade_registrada = int(velocidade_maxima_permitida), int(velocidade_registrada)
     if velocidade_registrada <= velocidade_maxima_permitida:
         return nenhuma_infracao
@@ -97,10 +77,8 @@ def classificacao_infracao(velocidade_registrada:str,velocidade_maxima_permitida
 
 
 
-def banner()->None:
-    """
-    Função responsável por gerar o banner do programa.
-    """
+def banner():
+
     print("""
  █████████   ███           █████                                              █████             ██████   ██████            ████   █████                     
  ███░░░░░███ ░░░           ░░███                                              ░░███             ░░██████ ██████            ░░███  ░░███                      
